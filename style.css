@@ -85,8 +85,24 @@ h4 {
 
 .glass-nav.scrolled {
   padding: 1rem 0;
-  background-color: rgba(247, 249, 252, 0.95);
+  background-color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 4px 30px rgba(45, 51, 56, 0.04);
+}
+
+.glass-nav.scrolled .logo {
+  color: var(--primary);
+}
+
+.glass-nav.scrolled .nav-links a {
+  color: var(--on-surface);
+}
+
+.glass-nav.scrolled .nav-links a:hover {
+  color: var(--primary);
+}
+
+.glass-nav.scrolled .hamburger span {
+  background-color: var(--on-surface);
 }
 
 .nav-content {
@@ -301,8 +317,9 @@ section {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(156, 72, 234, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(156, 72, 234, 0.5);
+  background-color: var(--primary-dim);
 }
 
 .btn-outline {
@@ -313,6 +330,7 @@ section {
 
 .btn-outline:hover {
   border-color: var(--primary);
+  background-color: var(--primary-container);
   color: var(--primary);
   transform: translateY(-2px);
 }
@@ -548,7 +566,7 @@ section {
 /* Fade in animations */
 .fade-in {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(40px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
@@ -609,4 +627,229 @@ section {
   section {
     padding: 6rem 0;
   }
+}
+
+/* --- Added Interactive Effects --- */
+
+/* Scroll Progress */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background-color: var(--primary);
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s ease;
+}
+
+/* Floating Shapes */
+.bg-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.3;
+}
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  background-color: #c4b5fd;
+  top: -10%;
+  left: -10%;
+  animation: drift1 25s infinite alternate ease-in-out;
+}
+.shape-2 {
+  width: 500px;
+  height: 500px;
+  background-color: #e9d5ff;
+  top: 40%;
+  right: -10%;
+  animation: drift2 30s infinite alternate ease-in-out;
+}
+.shape-3 {
+  width: 300px;
+  height: 300px;
+  background-color: #fce7f3;
+  bottom: -10%;
+  left: 20%;
+  animation: drift3 20s infinite alternate ease-in-out;
+}
+.shape-4 {
+  width: 450px;
+  height: 450px;
+  background-color: #c4b5fd;
+  bottom: 20%;
+  right: 20%;
+  animation: drift1 28s infinite alternate-reverse ease-in-out;
+}
+.shape-5 {
+  width: 350px;
+  height: 350px;
+  background-color: #fce7f3;
+  top: 20%;
+  left: 40%;
+  animation: drift2 22s infinite alternate ease-in-out;
+}
+
+@keyframes drift1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(100px, 50px) scale(1.1); }
+}
+@keyframes drift2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-80px, -60px) scale(1.05); }
+}
+@keyframes drift3 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, -100px) scale(0.95); }
+}
+
+/* Cursor Glow */
+#cursor-glow {
+  position: fixed;
+  top: -40px; 
+  left: -40px;
+  width: 80px;
+  height: 80px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 1001;
+}
+@media (hover: none) and (pointer: coarse) {
+  #cursor-glow {
+    display: none;
+  }
+}
+
+/* Hero Stagger Animation */
+.stagger-element {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggerFadeUp 0.8s ease-out forwards;
+}
+
+.stagger-element:nth-child(1) { animation-delay: 0.2s; }
+.stagger-element:nth-child(2) { animation-delay: 0.4s; }
+.stagger-element:nth-child(3) { animation-delay: 0.6s; }
+.stagger-element:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes staggerFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Global Texture */
+.texture-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9998;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+}
+
+/* About Overlay Dynamic Scroll */
+#about {
+  position: relative;
+  transition: color 0.5s ease;
+  --about-progress: 0;
+  z-index: 1; /* Keep content above psuedo */
+}
+
+#about::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, #0b132b 0%, #1c002b 50%, #7f34c4 100%);
+  opacity: var(--about-progress);
+  z-index: -1;
+  transition: opacity 0.1s ease-out;
+}
+
+#about.dark-active h2,
+#about.dark-active p,
+#about.dark-active .label-tag,
+#about.dark-active .chip {
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+#about.dark-active .chip {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* About Portrait Container */
+.about-photo-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.portrait-container {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  aspect-ratio: 4/5;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  transition: border-radius 8s ease-in-out infinite alternate, transform 0.5s ease;
+}
+
+.portrait-container:hover {
+  transform: scale(1.02) translateY(-10px);
+}
+
+.about-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.2);
+}
+
+.portrait-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  mix-blend-mode: screen;
+  opacity: 0.8;
+  transition: opacity 0.5s ease, background 0.5s ease, mix-blend-mode 0.5s ease;
+}
+
+.portrait-container:hover .portrait-overlay {
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+
+#about.dark-active .portrait-overlay {
+  background: #ffffff;
+  mix-blend-mode: overlay;
+  opacity: 0.2;
 }

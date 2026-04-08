@@ -11,6 +11,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Global Texture Overlay -->
+    <div class="texture-overlay"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Cursor Glow -->
+    <div id="cursor-glow"></div>
+
+    <!-- Floating Shapes -->
+    <div class="bg-shapes">
+        <div class="blob shape-1"></div>
+        <div class="blob shape-2"></div>
+        <div class="blob shape-3"></div>
+        <div class="blob shape-4"></div>
+        <div class="blob shape-5"></div>
+    </div>
+
     <nav id="navbar" class="glass-nav">
         <div class="nav-content">
             <div class="logo">Mary H. S.</div>
@@ -32,10 +50,10 @@
         <section id="hero" class="fade-in">
             <div class="container hero-container">
                 <div class="hero-text-col">
-                    <span class="label-tag">HELLO, I'M</span>
-                    <h1 class="hero-title"><span class="serif-italic">Mary Hyacinth Sarmieto</span></h1>
-                    <p class="hero-subtitle">a passionate <span class="highlight">[UI/UX]</span> <span class="highlight">[Developer]</span> crafting ethereal digital experiences.</p>
-                    <div class="hero-buttons">
+                    <span class="label-tag stagger-element">HELLO, I'M</span>
+                    <h1 class="hero-title stagger-element"><span class="serif-italic">Mary Hyacinth Sarmieto</span></h1>
+                    <p class="hero-subtitle stagger-element">a passionate <span class="highlight">[UI/UX]</span> <span class="highlight">[Developer]</span> crafting ethereal digital experiences.</p>
+                    <div class="hero-buttons stagger-element">
                         <a href="#contact" class="btn btn-primary">Get In Touch</a>
                         <a href="#portfolio" class="btn btn-outline">View Work</a>
                     </div>
@@ -52,7 +70,12 @@
 
         <section id="about" class="bg-section fade-in">
             <div class="container layout-asymmetric">
-                <div class="about-empty"></div>
+                <div class="about-photo-col">
+                    <div class="portrait-container">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" alt="Mary Hyacinth Sarmieto" class="about-portrait">
+                        <div class="portrait-overlay"></div>
+                    </div>
+                </div>
                 <div class="about-text">
                     <span class="label-tag">ABOUT ME</span>
                     <h2>The Digital Curator</h2>
