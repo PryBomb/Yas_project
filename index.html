@@ -187,6 +187,51 @@
     </main>
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supabaseUrl = 'https://norneamurllvgngskfsh.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vcm5lYW11cmxsdmduZ3NrZnNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3OTU3MTYsImV4cCI6MjA5MTM3MTcxNn0.YSzPWgvekx3LRuueZs_lm3li3RqxL5fd7e3DyiAaq6k';
+
+            const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+            const contactForm = document.querySelector('.contact-form');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const submitBtn = contactForm.querySelector('button');
+                    const originalText = submitBtn.innerText;
+                    submitBtn.innerText = 'TRANSMITTING...';
+
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        message: document.getElementById('message').value,
+                    };
+
+                    const { error } = await supabaseClient
+                        .from('contact_messages')
+                        .insert([formData]);
+
+                    if (error) {
+                        console.error('Supabase Error:', error);
+                        alert('Failed: ' + error.message);
+                    } else {
+                        alert('Success');
+                        contactForm.reset();
+                    }
+
+                    submitBtn.innerText = originalText;
+                });
+            } else {
+                console.error("Error: .contact-form not found in the DOM.");
+            }
+        });
+    </script>
+    </script>
 </body>
+
 
 </html>
